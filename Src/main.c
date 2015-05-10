@@ -50,7 +50,7 @@
 #define N_CHANNELS  4
 
 uint16_t captured_value[N_VALUES] = {0};
-int8_t rc_data[N_CHANNELS] = {0};
+uint16_t rc_data[N_CHANNELS] = {0};
 uint16_t temp;
 uint8_t pointer = 0;
 volatile uint8_t data_ready = 0;
@@ -76,12 +76,11 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 		pointer = 0;
 		for (i = 0; i < N_CHANNELS; i++)
 		{
-			if (captured_value[i] <= 1000)
-				rc_data[i] = -127;
-			else if (captured_value[i] >= 2000)
-				rc_data[i] = 127;
-			else
-				rc_data[i] = ((captured_value[i]-1500)*128)/500;		
+			if (captured_value[i] < 1000)
+				captured_value[i] = 1000;
+			else if (captured_value[i] > 2000)
+				captured_value[i] = 2000;
+			rc_data[i] = captured_value[i]-1000;		
 		};
 		data_ready = 1;
 	}
@@ -100,7 +99,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-	uint8_t buffer[5] = {0};
+
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/
@@ -118,7 +117,6 @@ int main(void)
   MX_USB_DEVICE_Init();
 
   /* USER CODE BEGIN 2 */
-	
 	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);
   /* USER CODE END 2 */
 
@@ -128,7 +126,7 @@ int main(void)
   {
 		if (data_ready)
 		{
-			USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)rc_data, 4);
+			USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)rc_data, 8);
 			data_ready = 0;
 		};
 		
