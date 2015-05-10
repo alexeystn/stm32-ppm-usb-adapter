@@ -1,0 +1,5 @@
+MDK-ARM/Adapter Configuration
+*.bak
+Adapter.uvgui.Alexey
+startup_stm32f303xc.lst
+.mxproject
