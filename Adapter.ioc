@@ -1,5 +1,5 @@
 #MicroXplorer Configuration settings - do not modify
-#Sun May 10 17:06:56 MSK 2015
+#Sun May 10 17:32:28 MSK 2015
 File.Version=5
 KeepUserPlacement=true
 Mcu.Family=STM32F3
@@ -263,8 +263,8 @@ ProjectManager.KeepUserCode=true
 ProjectManager.LastFirmware=true
 ProjectManager.LibraryCopy=1
 ProjectManager.ProjectBuild=false
-ProjectManager.ProjectFileName=Simulator.ioc
-ProjectManager.ProjectName=Simulator
+ProjectManager.ProjectFileName=Adapter.ioc
+ProjectManager.ProjectName=Adapter
 ProjectManager.TargetToolchain=MDK-ARM 4.73
 ProjectManager.ToolChainLocation=
 RCC.ADC12outputFreq_Value=72000000
@@ -287,7 +287,7 @@ RCC.HSI_VALUE=8000000
 RCC.I2C1Freq_Value=8000000
 RCC.I2C2Freq_Value=8000000
 RCC.I2SClocksFreq_Value=72000000
-RCC.IPParameters=UART5Freq_Value,TIM1Freq_Value,PLLMUL,LSI_VALUE,APB1TimFreq_Value,I2C2Freq_Value,APB2Freq_Value,APB1CLKDivider,TIM8Freq_Value,FCLKCortexFreq_Value,AHBFreq_Value,I2SClocksFreq_Value,PRESCALERUSB,SYSCLKFreq_VALUE,USART1Freq_Value,MCOFreq_Value,LSE_VALUE,HSE_VALUE,HSI_VALUE,PLLCLKFreq_Value,ADC34outputFreq_Value,HSIState,VCOOutput2Freq_Value,RTCFreq_Value,PLLMCOFreq_Value,FamilyName,USART2Freq_Value,HCLKFreq_Value,USBFreq_Value,HSIPLLFreq_Value,CortexFreq_Value,TIM2Freq_Value,I2C1Freq_Value,SYSCLKSourceVirtual,USART3Freq_Value,APB1Freq_Value,HSEPLLFreq_Value,RTCHSEDivFreq_Value,ADC12outputFreq_Value,APB2TimFreq_Value,UART4Freq_Value
+RCC.IPParameters=UART5Freq_Value,TIM1Freq_Value,PLLMUL,LSI_VALUE,APB1TimFreq_Value,I2C2Freq_Value,APB2Freq_Value,TIM8Freq_Value,APB1CLKDivider,FCLKCortexFreq_Value,AHBFreq_Value,I2SClocksFreq_Value,PRESCALERUSB,USART1Freq_Value,SYSCLKFreq_VALUE,MCOFreq_Value,LSE_VALUE,HSE_VALUE,HSI_VALUE,PLLCLKFreq_Value,ADC34outputFreq_Value,HSIState,VCOOutput2Freq_Value,RTCFreq_Value,PLLMCOFreq_Value,FamilyName,USART2Freq_Value,HCLKFreq_Value,USBFreq_Value,HSIPLLFreq_Value,CortexFreq_Value,TIM2Freq_Value,I2C1Freq_Value,SYSCLKSourceVirtual,USART3Freq_Value,APB1Freq_Value,HSEPLLFreq_Value,RTCHSEDivFreq_Value,ADC12outputFreq_Value,APB2TimFreq_Value,UART4Freq_Value
 RCC.LSE_VALUE=32768
 RCC.LSI_VALUE=40000
 RCC.MCOFreq_Value=72000000
@@ -322,10 +322,11 @@ SH.GPXTI5.ConfNb=1
 SH.S_TIM3_CH1.0=TIM3_CH1,TriggerSource_TI1FP1
 SH.S_TIM3_CH1.1=TIM3_CH1,Input_Capture1_from_TI1
 SH.S_TIM3_CH1.ConfNb=2
-TIM3.IPParameters=Prescaler
+TIM3.IPParameters=Prescaler,Period
+TIM3.Period=0xFFFF
 TIM3.Prescaler=71
 USB_DEVICE.CLASS_NAME-HID_FS=HID
-USB_DEVICE.IPParameters=USBD_HandleTypeDef-HID_FS,VirtualModeFS-HID_FS,VirtualMode-HID_FS,CLASS_NAME-HID_FS,PID_FS-HID_FS
+USB_DEVICE.IPParameters=USBD_HandleTypeDef-HID_FS,VirtualModeFS-HID_FS,PID_FS-HID_FS,VirtualMode-HID_FS,CLASS_NAME-HID_FS
 USB_DEVICE.PID_FS-HID_FS=22315
 USB_DEVICE.USBD_HandleTypeDef-HID_FS=hUsbDeviceFS
 USB_DEVICE.VirtualMode-HID_FS=Hid
