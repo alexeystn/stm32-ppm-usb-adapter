@@ -39,7 +39,7 @@
 #include "gpio.h"
 
 /* USER CODE BEGIN Includes */
-
+#include "usbd_hid.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -53,6 +53,8 @@ uint16_t captured_value[N_VALUES] = {0};
 int8_t rc_data[N_CHANNELS] = {0};
 uint16_t temp;
 uint8_t pointer = 0;
+volatile uint8_t data_ready = 0;
+extern USBD_HandleTypeDef hUsbDeviceFS;
 
 /* USER CODE END PV */
 
@@ -69,7 +71,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
 	uint8_t i;
 	temp = htim->Instance->CCR1;
-	if (temp > 5000)
+	if ((temp > 5000) && (!data_ready))
 	{
 		pointer = 0;
 		for (i = 0; i < N_CHANNELS; i++)
@@ -79,11 +81,9 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 			else if (captured_value[i] >= 2000)
 				rc_data[i] = 127;
 			else
-				rc_data[i] = ((captured_value[i]-1500)*128)/500;
-			
-		};			
-		
-			
+				rc_data[i] = ((captured_value[i]-1500)*128)/500;		
+		};
+		data_ready = 1;
 	}
 	else
 	{
@@ -100,7 +100,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+	uint8_t buffer[5] = {0};
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/
@@ -114,9 +114,11 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM3_Init();
-  //MX_USB_DEVICE_Init();
+	HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_SET);
+  MX_USB_DEVICE_Init();
 
   /* USER CODE BEGIN 2 */
+	
 	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);
   /* USER CODE END 2 */
 
@@ -124,7 +126,12 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-
+		if (data_ready)
+		{
+			USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)rc_data, 4);
+			data_ready = 0;
+		};
+		
   }
   /* USER CODE END 3 */
 
