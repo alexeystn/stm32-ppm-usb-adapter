@@ -45,9 +45,12 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-#define N 16
-uint16_t captured_value[N] = {0};
-uint16_t rc_data[8] = {0};
+
+#define N_VALUES    16
+#define N_CHANNELS  4
+
+uint16_t captured_value[N_VALUES] = {0};
+int8_t rc_data[N_CHANNELS] = {0};
 uint16_t temp;
 uint8_t pointer = 0;
 
@@ -69,15 +72,25 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 	if (temp > 5000)
 	{
 		pointer = 0;
-		for (i = 0; i < 8; i++)
-			rc_data[i] = captured_value[i];
+		for (i = 0; i < N_CHANNELS; i++)
+		{
+			if (captured_value[i] <= 1000)
+				rc_data[i] = -127;
+			else if (captured_value[i] >= 2000)
+				rc_data[i] = 127;
+			else
+				rc_data[i] = ((captured_value[i]-1500)*128)/500;
+			
+		};			
+		
+			
 	}
 	else
 	{
 		captured_value[pointer] = temp;
 		pointer++;
 	};
-	if (pointer == N)
+	if (pointer == N_VALUES)
 		pointer = 0;
 }
 
