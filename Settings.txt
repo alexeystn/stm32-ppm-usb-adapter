@@ -1,0 +1,51 @@
+Crystal resonator 8 MHz
+PPM to PC6
+
+
+Board Selector: STM32F3Discovery
+
+
+====PINOUT====
+
+  ----RCC---
+  High Speed Clock: Crystal/Ceramic Resonator
+
+  ----USB----
+  Device (FS)
+  Middlewares->USB_DEVICE->Class For FS IP: HID Class
+
+  ----TIM3----
+  Slave Mode: Reset Mode
+  Trigger Source: TI1FP1
+  Clock Source: Internal Clock
+  Channel1: Input Capture direct mode
+
+  ----GPIO----
+  PC6: TIM3_CH1 (Automatically)
+
+====CLOCK====
+
+  Input Frequency: 8 MHz
+  PLL Source Mix: HSE
+  PLLMul: x 9
+  USB Prescaler: /1.5
+
+
+====CONFIGURATION====
+
+  ----TIM3----
+  Prescaler: 71
+  Counter Period: 0xFFFF
+  Polarity Selection: Rising Edge
+  NVIC: TIM3 global interrupt
+ 
+  ----USB-DEVICE----
+  Product string: "STM32 PPM-USB Adapter"
+
+====PROJECT=SETTINGS====
+
+  Name, Location
+  Toolchain: MDK-ARM 4.73
+  Code generator: copy only neccessary, generate as a pair
+
+
