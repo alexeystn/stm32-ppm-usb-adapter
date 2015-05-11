@@ -46,11 +46,10 @@
 
 /* USER CODE BEGIN PV */
 
-#define N_VALUES    16
-#define N_CHANNELS  4
+#define N 16
 
-uint16_t captured_value[N_VALUES] = {0};
-uint16_t rc_data[N_CHANNELS] = {0};
+uint16_t captured_value[N] = {0};
+uint16_t rc_data[5] = {0};
 uint16_t temp;
 uint8_t pointer = 0;
 volatile uint8_t data_ready = 0;
@@ -74,14 +73,23 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 	if ((temp > 5000) && (!data_ready))
 	{
 		pointer = 0;
-		for (i = 0; i < N_CHANNELS; i++)
+		for (i = 0; i < 4; i++)
 		{
 			if (captured_value[i] < 1000)
 				captured_value[i] = 1000;
 			else if (captured_value[i] > 2000)
 				captured_value[i] = 2000;
 			rc_data[i] = captured_value[i]-1000;		
-		};
+		};	
+		rc_data[4] = 0;
+		if (captured_value[4] > 1500) // LB
+			rc_data[4] |= (1<<4);
+		if (captured_value[5] > 1500) // RB
+			rc_data[4] |= (1<<5);
+		if (captured_value[6] > 1500) // Back
+			rc_data[4] |= (1<<6);
+		if (captured_value[7] > 1500) // Start
+			rc_data[4] |= (1<<7);
 		data_ready = 1;
 	}
 	else
@@ -89,7 +97,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 		captured_value[pointer] = temp;
 		pointer++;
 	};
-	if (pointer == N_VALUES)
+	if (pointer == N)
 		pointer = 0;
 }
 
@@ -113,7 +121,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM3_Init();
-	HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_SET);
   MX_USB_DEVICE_Init();
 
   /* USER CODE BEGIN 2 */
@@ -126,7 +134,7 @@ int main(void)
   {
 		if (data_ready)
 		{
-			USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)rc_data, 8);
+			USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)rc_data, 10);
 			data_ready = 0;
 		};
 		

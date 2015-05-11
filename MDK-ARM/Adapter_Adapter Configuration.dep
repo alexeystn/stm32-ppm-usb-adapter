@@ -34,7 +34,7 @@ I (C:\Program Files\Keil\ARM\ARMCC\include\string.h)(0x52FE0ABE)
 I (..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h)(0x54F21E85)
 I (..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h)(0x54F21E85)
 I (..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h)(0x54F21E85)
-I (..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc\usbd_hid.h)(0x54F21E85)
+I (..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc\usbd_hid.h)(0x55505088)
 F (..\Src\stm32f3xx_hal_msp.c)(0x554F6A59)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Inc -I..\Drivers\STM32F3xx_HAL_Driver\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc -I..\Drivers\CMSIS\Include -I..\Drivers\CMSIS\Device\ST\STM32F3xx\Include --C99-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include"-DUSE_HAL_DRIVER -DSTM32F303xC -o "adapter configuration\stm32f3xx_hal_msp.o" --omf_browse "adapter configuration\stm32f3xx_hal_msp.crf" --depend "adapter configuration\stm32f3xx_hal_msp.d")
 I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal.h)(0x54F21E7C)
 I (..\Inc\stm32f3xx_hal_conf.h)(0x554F6A5A)
@@ -62,7 +62,7 @@ I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal_pwr.h)(0x54F21E7C)
 I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal_pwr_ex.h)(0x54F21E7C)
 I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal_tim.h)(0x54F21E7C)
 I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal_tim_ex.h)(0x54F21E7C)
-F (..\Src\usbd_desc.c)(0x554F6A59)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Inc -I..\Drivers\STM32F3xx_HAL_Driver\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc -I..\Drivers\CMSIS\Include -I..\Drivers\CMSIS\Device\ST\STM32F3xx\Include --C99-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include"-DUSE_HAL_DRIVER -DSTM32F303xC -o "adapter configuration\usbd_desc.o" --omf_browse "adapter configuration\usbd_desc.crf" --depend "adapter configuration\usbd_desc.d")
+F (..\Src\usbd_desc.c)(0x554F7718)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Inc -I..\Drivers\STM32F3xx_HAL_Driver\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc -I..\Drivers\CMSIS\Include -I..\Drivers\CMSIS\Device\ST\STM32F3xx\Include --C99-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include"-DUSE_HAL_DRIVER -DSTM32F303xC -o "adapter configuration\usbd_desc.o" --omf_browse "adapter configuration\usbd_desc.crf" --depend "adapter configuration\usbd_desc.d")
 I (..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h)(0x54F21E85)
 I (..\Inc\usbd_conf.h)(0x554F6A59)
 I (C:\Program Files\Keil\ARM\ARMCC\include\stdio.h)(0x52FE0ABE)
@@ -127,7 +127,7 @@ I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal_pwr_ex.h)(0x54F21E7C)
 I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal_tim.h)(0x54F21E7C)
 I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal_tim_ex.h)(0x54F21E7C)
 I (..\Inc\gpio.h)(0x554F6A57)
-F (..\Src\main.c)(0x554F6B62)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Inc -I..\Drivers\STM32F3xx_HAL_Driver\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc -I..\Drivers\CMSIS\Include -I..\Drivers\CMSIS\Device\ST\STM32F3xx\Include --C99-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include"-DUSE_HAL_DRIVER -DSTM32F303xC -o "adapter configuration\main.o" --omf_browse "adapter configuration\main.crf" --depend "adapter configuration\main.d")
+F (..\Src\main.c)(0x5550583E)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Inc -I..\Drivers\STM32F3xx_HAL_Driver\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc -I..\Drivers\CMSIS\Include -I..\Drivers\CMSIS\Device\ST\STM32F3xx\Include --C99-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include"-DUSE_HAL_DRIVER -DSTM32F303xC -o "adapter configuration\main.o" --omf_browse "adapter configuration\main.crf" --depend "adapter configuration\main.d")
 I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal.h)(0x54F21E7C)
 I (..\Inc\stm32f3xx_hal_conf.h)(0x554F6A5A)
 I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal_rcc.h)(0x54F21E7C)
@@ -162,7 +162,11 @@ I (C:\Program Files\Keil\ARM\ARMCC\include\stdio.h)(0x52FE0ABE)
 I (C:\Program Files\Keil\ARM\ARMCC\include\stdlib.h)(0x52FE0ABE)
 I (C:\Program Files\Keil\ARM\ARMCC\include\string.h)(0x52FE0ABE)
 I (..\Inc\gpio.h)(0x554F6A57)
-F (..\Src\gpio.c)(0x554F6A57)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Inc -I..\Drivers\STM32F3xx_HAL_Driver\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc -I..\Drivers\CMSIS\Include -I..\Drivers\CMSIS\Device\ST\STM32F3xx\Include --C99-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include"-DUSE_HAL_DRIVER -DSTM32F303xC -o "adapter configuration\gpio.o" --omf_browse "adapter configuration\gpio.crf" --depend "adapter configuration\gpio.d")
+I (..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc\usbd_hid.h)(0x55505088)
+I (..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h)(0x54F21E85)
+I (..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h)(0x54F21E85)
+I (..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h)(0x54F21E85)
+F (..\Src\gpio.c)(0x554F7272)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Inc -I..\Drivers\STM32F3xx_HAL_Driver\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc -I..\Drivers\CMSIS\Include -I..\Drivers\CMSIS\Device\ST\STM32F3xx\Include --C99-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include"-DUSE_HAL_DRIVER -DSTM32F303xC -o "adapter configuration\gpio.o" --omf_browse "adapter configuration\gpio.crf" --depend "adapter configuration\gpio.d")
 I (..\Inc\gpio.h)(0x554F6A57)
 I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal.h)(0x54F21E7C)
 I (..\Inc\stm32f3xx_hal_conf.h)(0x554F6A5A)
@@ -190,7 +194,7 @@ I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal_pwr.h)(0x54F21E7C)
 I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal_pwr_ex.h)(0x54F21E7C)
 I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal_tim.h)(0x54F21E7C)
 I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal_tim_ex.h)(0x54F21E7C)
-F (..\Src\usb_device.c)(0x554F6A58)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Inc -I..\Drivers\STM32F3xx_HAL_Driver\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc -I..\Drivers\CMSIS\Include -I..\Drivers\CMSIS\Device\ST\STM32F3xx\Include --C99-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include"-DUSE_HAL_DRIVER -DSTM32F303xC -o "adapter configuration\usb_device.o" --omf_browse "adapter configuration\usb_device.crf" --depend "adapter configuration\usb_device.d")
+F (..\Src\usb_device.c)(0x554FB872)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Inc -I..\Drivers\STM32F3xx_HAL_Driver\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc -I..\Drivers\CMSIS\Include -I..\Drivers\CMSIS\Device\ST\STM32F3xx\Include --C99-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include"-DUSE_HAL_DRIVER -DSTM32F303xC -o "adapter configuration\usb_device.o" --omf_browse "adapter configuration\usb_device.crf" --depend "adapter configuration\usb_device.d")
 I (..\Inc\usb_device.h)(0x554F6A59)
 I (..\Drivers\CMSIS\Device\ST\STM32F3xx\Include\stm32f3xx.h)(0x54F21E6B)
 I (..\Drivers\CMSIS\Device\ST\STM32F3xx\Include\stm32f303xc.h)(0x54F21E6B)
@@ -227,7 +231,7 @@ I (..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h)(0x54F21E85)
 I (..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h)(0x54F21E85)
 I (..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h)(0x54F21E85)
 I (..\Inc\usbd_desc.h)(0x554F6A59)
-I (..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc\usbd_hid.h)(0x54F21E85)
+I (..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc\usbd_hid.h)(0x55505088)
 F (..\Src\stm32f3xx_it.c)(0x554F6A59)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Inc -I..\Drivers\STM32F3xx_HAL_Driver\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc -I..\Drivers\CMSIS\Include -I..\Drivers\CMSIS\Device\ST\STM32F3xx\Include --C99-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include"-DUSE_HAL_DRIVER -DSTM32F303xC -o "adapter configuration\stm32f3xx_it.o" --omf_browse "adapter configuration\stm32f3xx_it.crf" --depend "adapter configuration\stm32f3xx_it.d")
 I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal.h)(0x54F21E7C)
 I (..\Inc\stm32f3xx_hal_conf.h)(0x554F6A5A)
@@ -284,8 +288,8 @@ I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal_pwr_ex.h)(0x54F21E7C)
 I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal_tim.h)(0x54F21E7C)
 I (..\Drivers\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal_tim_ex.h)(0x54F21E7C)
 F (..\Drivers\CMSIS\Device\ST\STM32F3xx\Source\Templates\arm\startup_stm32f303xc.s)(0x54F21E6B)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include"--list startup_stm32f303xc.lst --xref -o "adapter configuration\startup_stm32f303xc.o" --depend "adapter configuration\startup_stm32f303xc.d")
-F (..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Src\usbd_hid.c)(0x54F21E85)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Inc -I..\Drivers\STM32F3xx_HAL_Driver\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc -I..\Drivers\CMSIS\Include -I..\Drivers\CMSIS\Device\ST\STM32F3xx\Include --C99-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include"-DUSE_HAL_DRIVER -DSTM32F303xC -o "adapter configuration\usbd_hid.o" --omf_browse "adapter configuration\usbd_hid.crf" --depend "adapter configuration\usbd_hid.d")
-I (..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc\usbd_hid.h)(0x54F21E85)
+F (..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Src\usbd_hid.c)(0x555054B0)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Inc -I..\Drivers\STM32F3xx_HAL_Driver\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc -I..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc -I..\Drivers\CMSIS\Include -I..\Drivers\CMSIS\Device\ST\STM32F3xx\Include --C99-I "C:\Program Files\Keil\ARM\RV31\INC"-I "C:\Program Files\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include"-DUSE_HAL_DRIVER -DSTM32F303xC -o "adapter configuration\usbd_hid.o" --omf_browse "adapter configuration\usbd_hid.crf" --depend "adapter configuration\usbd_hid.d")
+I (..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc\usbd_hid.h)(0x55505088)
 I (..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h)(0x54F21E85)
 I (..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_def.h)(0x54F21E85)
 I (..\Inc\usbd_conf.h)(0x554F6A59)
