@@ -1,9 +1,7 @@
 /**
   ******************************************************************************
-  * File Name          : TIM.h
-  * Date               : 10/05/2015 17:25:28
-  * Description        : This file provides code for the configuration
-  *                      of the TIM instances.
+  * File Name          : mxconstants.h
+  * Description        : This file contains the common defines of the application
   ******************************************************************************
   *
   * COPYRIGHT(c) 2015 STMicroelectronics
@@ -32,31 +30,24 @@
   *
   ******************************************************************************
   */
-/* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __tim_H
-#define __tim_H
-#ifdef __cplusplus
- extern "C" {
-#endif
-
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f3xx_hal.h"
 
-extern TIM_HandleTypeDef htim3;
+/* USER CODE BEGIN Includes */
 
-void MX_TIM3_Init(void);
+/* USER CODE END Includes */
 
-#ifdef __cplusplus
-}
-#endif
-#endif /*__ tim_H */
+/* Private define ------------------------------------------------------------*/
 
-/**
-  * @}
-  */
+/* USER CODE BEGIN Private defines */
+
+/* USER CODE END Private defines */
 
 /**
   * @}
-  */
+  */ 
+
+/**
+  * @}
+*/ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

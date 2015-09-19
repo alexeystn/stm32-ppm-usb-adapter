@@ -1,7 +1,6 @@
 /**
   ******************************************************************************
   * @file           : usbd_conf.h
-  * @date           : 10/05/2015 17:25:29  
   * @version        : v1.0_Cube
   * @brief          : Header for usbd_conf file.
   ******************************************************************************
@@ -34,6 +33,9 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __USBD_CONF__H__
 #define __USBD_CONF__H__
+#ifdef __cplusplus
+ extern "C" {
+#endif
 /* Includes ------------------------------------------------------------------*/
 #include <stdio.h>
 #include <stdlib.h>
@@ -152,6 +154,10 @@ void USBD_static_free(void *p);
 /**
   * @}
   */ 
+#ifdef __cplusplus
+}
+#endif
+  
 #endif //__USBD_CONF__H__
 
 /**

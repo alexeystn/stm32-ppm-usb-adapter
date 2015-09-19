@@ -1,7 +1,6 @@
 /**
   ******************************************************************************
   * @file    stm32f3xx_it.c
-  * @date    10/05/2015 17:25:29
   * @brief   Interrupt Service Routines.
   ******************************************************************************
   *
@@ -35,11 +34,12 @@
 #include "stm32f3xx_hal.h"
 #include "stm32f3xx.h"
 #include "stm32f3xx_it.h"
+
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
-/* External variables --------------------------------------------------------*/
 
+/* External variables --------------------------------------------------------*/
 extern PCD_HandleTypeDef hpcd_USB_FS;
 extern TIM_HandleTypeDef htim3;
 
@@ -62,6 +62,27 @@ void SysTick_Handler(void)
   /* USER CODE END SysTick_IRQn 1 */
 }
 
+/******************************************************************************/
+/* STM32F3xx Peripheral Interrupt Handlers                                    */
+/* Add here the Interrupt Handlers for the used peripherals.                  */
+/* For the available peripheral interrupt handler names,                      */
+/* please refer to the startup file (startup_stm32f3xx.s).                    */
+/******************************************************************************/
+
+/**
+* @brief This function handles USB low priority or CAN_RX0 interrupts.
+*/
+void USB_LP_CAN_RX0_IRQHandler(void)
+{
+  /* USER CODE BEGIN USB_LP_CAN_RX0_IRQn 0 */
+
+  /* USER CODE END USB_LP_CAN_RX0_IRQn 0 */
+  HAL_PCD_IRQHandler(&hpcd_USB_FS);
+  /* USER CODE BEGIN USB_LP_CAN_RX0_IRQn 1 */
+
+  /* USER CODE END USB_LP_CAN_RX0_IRQn 1 */
+}
+
 /**
 * @brief This function handles TIM3 global interrupt.
 */
@@ -74,20 +95,6 @@ void TIM3_IRQHandler(void)
   /* USER CODE BEGIN TIM3_IRQn 1 */
 
   /* USER CODE END TIM3_IRQn 1 */
-}
-
-/**
-* @brief This function handles USB Low Priority or CAN_RX0 interrupts.
-*/
-void USB_LP_CAN_RX0_IRQHandler(void)
-{
-  /* USER CODE BEGIN USB_LP_CAN_RX0_IRQn 0 */
-
-  /* USER CODE END USB_LP_CAN_RX0_IRQn 0 */
-  HAL_PCD_IRQHandler(&hpcd_USB_FS);
-  /* USER CODE BEGIN USB_LP_CAN_RX0_IRQn 1 */
-
-  /* USER CODE END USB_LP_CAN_RX0_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

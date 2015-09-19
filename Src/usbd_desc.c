@@ -1,7 +1,6 @@
 /**
   ******************************************************************************
   * @file           : usbd_desc.c
-  * @date           : 10/05/2015 17:25:29  
   * @version        : v1.0_Cube
   * @brief          : This file implements the USB Device descriptors
   ******************************************************************************
@@ -37,6 +36,7 @@
 #include "usbd_core.h"
 #include "usbd_desc.h"
 #include "usbd_conf.h"
+
 /** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
   * @{
   */
@@ -56,12 +56,14 @@
 /** @defgroup USBD_DESC_Private_Defines
   * @{
   */ 
-#define USBD_VID     1155
+#define USBD_VID     0x483
 #define USBD_LANGID_STRING     1033
 #define USBD_MANUFACTURER_STRING     "STMicroelectronics"
-#define USBD_PID_FS     0x2222
+#define USBD_PID_FS     0x57FF
 #define USBD_PRODUCT_STRING_FS     "STM32 PPM-USB Adapter"
+/* USER CODE BEGIN SERIALNUMBER_STRING_FS */
 #define USBD_SERIALNUMBER_STRING_FS     "00000000001A"
+/* USER CODE END SERIALNUMBER_STRING_FS */
 #define USBD_CONFIGURATION_STRING_FS     "HID Config"
 #define USBD_INTERFACE_STRING_FS     "HID Interface"
 
@@ -110,7 +112,7 @@ __ALIGN_BEGIN uint8_t USBD_FS_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END =
   {
     0x12,                       /*bLength */
     USB_DESC_TYPE_DEVICE,       /*bDescriptorType*/
-    0x00,                       /*bcdUSB */
+    0x00,                       /* bcdUSB */  
     0x02,
     0x00,                       /*bDeviceClass*/
     0x00,                       /*bDeviceSubClass*/
@@ -126,7 +128,8 @@ __ALIGN_BEGIN uint8_t USBD_FS_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END =
     USBD_IDX_PRODUCT_STR,       /*Index of product string*/
     USBD_IDX_SERIAL_STR,        /*Index of serial number string*/
     USBD_MAX_NUM_CONFIGURATION  /*bNumConfigurations*/
-  } ; /* USB_DeviceDescriptor */
+  } ; 
+/* USB_DeviceDescriptor */
 
 #if defined ( __ICCARM__ ) /*!< IAR Compiler */
   #pragma data_alignment=4   

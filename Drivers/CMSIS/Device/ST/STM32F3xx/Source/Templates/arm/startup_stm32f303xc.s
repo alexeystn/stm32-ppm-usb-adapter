@@ -1,7 +1,7 @@
 ;******************** (C) COPYRIGHT 2014 STMicroelectronics ********************
 ;* File Name          : startup_stm32f303xc.s
 ;* Author             : MCD Application Team
-;* Version            : V1.1.0
+;* Version            : $VERSION$
 ;* Date               : 12-Sept-2014
 ;* Description        : STM32F303xB/xC devices vector table for MDK-ARM toolchain.
 ;*                      This module performs:

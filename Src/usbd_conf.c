@@ -1,7 +1,6 @@
 /**
   ******************************************************************************
   * @file           : usbd_conf.c
-  * @date           : 10/05/2015 17:25:29   
   * @version        : v1.0_Cube
   * @brief          : This file implements the board support package for the USB device library
   ******************************************************************************
@@ -45,16 +44,13 @@
 PCD_HandleTypeDef hpcd_USB_FS;
 
 /* USER CODE BEGIN 0 */
-__IO uint32_t remotewakeupon=0;
 /* USER CODE END 0 */
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 /* USER CODE BEGIN 1 */
-static void SystemClockConfig_Resume(void);
 /* USER CODE END 1 */
 void HAL_PCDEx_SetConnectionState(PCD_HandleTypeDef *hpcd, uint8_t state);
-extern void SystemClock_Config(void);
 
 /*******************************************************************************
                        LL Driver Callbacks (PCD -> USB Device Library)
@@ -69,8 +65,6 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef* hpcd)
   /* USER CODE BEGIN USB_MspInit 0 */
 
   /* USER CODE END USB_MspInit 0 */
-    /* Peripheral clock enable */
-    __USB_CLK_ENABLE();
   
     /**USB GPIO Configuration    
     PA11     ------> USB_DM
@@ -79,10 +73,14 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef* hpcd)
     GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_12;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
+    GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF14_USB;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+    /* Peripheral clock enable */
+    __USB_CLK_ENABLE();
+
+    /* Peripheral interrupt init*/
     HAL_NVIC_SetPriority(USB_LP_CAN_RX0_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(USB_LP_CAN_RX0_IRQn);
   /* USER CODE BEGIN USB_MspInit 1 */
@@ -199,7 +197,7 @@ void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
   if (hpcd->Init.low_power_enable)
   {
     /* Set SLEEPDEEP bit and SleepOnExit of Cortex System Control Register */
-    //SCB->SCR |= (uint32_t)((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));
+    SCB->SCR |= (uint32_t)((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));
   }
   /* USER CODE END 2 */
 }
@@ -213,13 +211,7 @@ void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
 void HAL_PCD_ResumeCallback(PCD_HandleTypeDef *hpcd)
 {
   /* USER CODE BEGIN 3 */
-  if ((hpcd->Init.low_power_enable)&&(remotewakeupon == 0))
-  {
-    SystemClockConfig_Resume();
-    /* Reset SLEEPDEEP bit of Cortex System Control Register */
-    //SCB->SCR &= (uint32_t)~((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));    
-  }
-  remotewakeupon=0;
+
   /* USER CODE END 3 */
   USBD_LL_Resume(hpcd->pData);
   
@@ -287,7 +279,6 @@ USBD_StatusTypeDef  USBD_LL_Init (USBD_HandleTypeDef *pdev)
   hpcd_USB_FS.Init.speed = PCD_SPEED_FULL;
   hpcd_USB_FS.Init.ep0_mps = DEP0CTL_MPS_64;
   hpcd_USB_FS.Init.phy_itface = PCD_PHY_EMBEDDED;
-  hpcd_USB_FS.Init.Sof_enable = DISABLE;
   hpcd_USB_FS.Init.low_power_enable = DISABLE;
   hpcd_USB_FS.Init.battery_charging_enable = DISABLE;
   HAL_PCD_Init(&hpcd_USB_FS);
@@ -501,7 +492,7 @@ void  USBD_LL_Delay (uint32_t Delay)
   */
 void *USBD_static_malloc(uint32_t size)
 {
-  static uint8_t mem[sizeof(USBD_HID_HandleTypeDef)];
+  static uint32_t mem[(sizeof(USBD_HID_HandleTypeDef)/4)+1];//On 32-bit boundary
   return mem;
 }
 
@@ -514,19 +505,6 @@ void USBD_static_free(void *p)
 {
 }
 
-/* USER CODE BEGIN 4 */
-/**
-  * @brief  Configures system clock after wake-up from USB Resume CallBack: 
-  *         enable HSI, PLL and select PLL as system clock source.
-  * @param  None
-  * @retval None
-  */
-static void SystemClockConfig_Resume(void)
-{
-	SystemClock_Config();
-}
-/* USER CODE END 4 */
-
 /**
 * @brief Software Device Connection
 * @param hpcd: PCD handle
@@ -535,7 +513,7 @@ static void SystemClockConfig_Resume(void)
 */
 void HAL_PCDEx_SetConnectionState(PCD_HandleTypeDef *hpcd, uint8_t state)
 {
-/* USER CODE BEGIN 5 */
+/* USER CODE BEGIN 4 */
   if (state == 1)
   {
     /* Configure Low Connection State */
@@ -546,7 +524,7 @@ void HAL_PCDEx_SetConnectionState(PCD_HandleTypeDef *hpcd, uint8_t state)
     /* Configure High Connection State */
    
   } 
-/* USER CODE END 5 */
+/* USER CODE END 4 */
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

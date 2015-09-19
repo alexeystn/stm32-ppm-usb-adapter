@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    stm32f3xx.h
   * @author  MCD Application Team
-  * @version V1.1.0
+  * @version $VERSION$
   * @date    12-Sept-2014
   * @brief   CMSIS STM32F3xx Device Peripheral Access Layer Header File.           
   *            
@@ -107,7 +107,7 @@
 #endif /* USE_HAL_DRIVER */
 
 /**
-  * @brief CMSIS Device version number V1.1.0
+  * @brief CMSIS Device version number $VERSION$
   */
 #define __STM32F3xx_CMSIS_DEVICE_VERSION_MAIN   (0x02) /*!< [31:24] main version */                                  
 #define __STM32F3xx_CMSIS_DEVICE_VERSION_SUB1   (0x01) /*!< [23:16] sub1 version */

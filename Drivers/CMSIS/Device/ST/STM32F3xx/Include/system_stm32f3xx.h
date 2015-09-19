@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    system_stm32f3xx.h
   * @author  MCD Application Team
-  * @version V1.1.0
+  * @version $VERSION$
   * @date    12-Sept-2014
   * @brief   CMSIS Cortex-M4 Device System Source File for STM32F3xx devices.  
   ******************************************************************************

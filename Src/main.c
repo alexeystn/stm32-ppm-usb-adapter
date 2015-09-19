@@ -1,7 +1,6 @@
 /**
   ******************************************************************************
   * File Name          : main.c
-  * Date               : 10/05/2015 17:25:30
   * Description        : Main program body
   ******************************************************************************
   *
@@ -31,45 +30,41 @@
   *
   ******************************************************************************
   */
-
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f3xx_hal.h"
-#include "tim.h"
 #include "usb_device.h"
-#include "gpio.h"
 
 /* USER CODE BEGIN Includes */
 #include "usbd_hid.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
+TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
-
-#define N 16
-
-uint16_t captured_value[N] = {0};
+/* Private variables ---------------------------------------------------------*/
+uint16_t captured_value[8] = {0};
 uint16_t rc_data[5] = {0};
-uint16_t temp;
 uint8_t pointer = 0;
-volatile uint8_t data_ready = 0;
-extern USBD_HandleTypeDef hUsbDeviceFS;
-
+uint8_t data_ready = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_TIM3_Init(void);
 
 /* USER CODE BEGIN PFP */
+/* Private function prototypes -----------------------------------------------*/
 
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
 	uint8_t i;
-	temp = htim->Instance->CCR1;
+	uint16_t temp;
+	temp = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
 	if ((temp > 5000) && (!data_ready))
 	{
 		pointer = 0;
@@ -79,16 +74,16 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 				captured_value[i] = 1000;
 			else if (captured_value[i] > 2000)
 				captured_value[i] = 2000;
-			rc_data[i] = captured_value[i]-1000;		
-		};	
+			rc_data[i] = captured_value[i]-1000;
+		};
 		rc_data[4] = 0;
-		if (captured_value[4] > 1500) // LB
+		if (captured_value[4] > 1500)
 			rc_data[4] |= (1<<4);
-		if (captured_value[5] > 1500) // RB
+		if (captured_value[5] > 1500)
 			rc_data[4] |= (1<<5);
-		if (captured_value[6] > 1500) // Back
+		if (captured_value[6] > 1500)
 			rc_data[4] |= (1<<6);
-		if (captured_value[7] > 1500) // Start
+		if (captured_value[7] > 1500)
 			rc_data[4] |= (1<<7);
 		data_ready = 1;
 	}
@@ -97,10 +92,9 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 		captured_value[pointer] = temp;
 		pointer++;
 	};
-	if (pointer == N)
-		pointer = 0;
-}
-
+	if (pointer == 8) 
+		pointer = 0;	
+};
 /* USER CODE END 0 */
 
 int main(void)
@@ -121,23 +115,24 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM3_Init();
-  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_SET);
   MX_USB_DEVICE_Init();
 
   /* USER CODE BEGIN 2 */
-  HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);
+	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);
   /* USER CODE END 2 */
 
-  /* USER CODE BEGIN 3 */
   /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
   while (1)
   {
+  /* USER CODE END WHILE */
+
+  /* USER CODE BEGIN 3 */
 		if (data_ready)
 		{
 			USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)rc_data, 10);
 			data_ready = 0;
-		};
-		
+		}
   }
   /* USER CODE END 3 */
 
@@ -153,7 +148,7 @@ void SystemClock_Config(void)
   RCC_PeriphCLKInitTypeDef PeriphClkInit;
 
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
@@ -171,7 +166,115 @@ void SystemClock_Config(void)
   PeriphClkInit.USBClockSelection = RCC_USBPLLCLK_DIV1_5;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit);
 
-  __SYSCFG_CLK_ENABLE();
+  HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
+
+  HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
+
+}
+
+/* TIM3 init function */
+void MX_TIM3_Init(void)
+{
+
+  TIM_ClockConfigTypeDef sClockSourceConfig;
+  TIM_SlaveConfigTypeDef sSlaveConfig;
+  TIM_MasterConfigTypeDef sMasterConfig;
+  TIM_IC_InitTypeDef sConfigIC;
+
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 71;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 0xFFFF;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  HAL_TIM_Base_Init(&htim3);
+
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig);
+
+  HAL_TIM_IC_Init(&htim3);
+
+  sSlaveConfig.SlaveMode = TIM_SLAVEMODE_RESET;
+  sSlaveConfig.InputTrigger = TIM_TS_TI1FP1;
+  sSlaveConfig.TriggerPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
+  sSlaveConfig.TriggerFilter = 0;
+  HAL_TIM_SlaveConfigSynchronization(&htim3, &sSlaveConfig);
+
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig);
+
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
+  sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
+  sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
+  sConfigIC.ICFilter = 0;
+  HAL_TIM_IC_ConfigChannel(&htim3, &sConfigIC, TIM_CHANNEL_1);
+
+}
+
+/** Configure pins as 
+        * Analog 
+        * Input 
+        * Output
+        * EVENT_OUT
+        * EXTI
+     PA5   ------> SPI1_SCK
+     PA6   ------> SPI1_MISO
+     PA7   ------> SPI1_MOSI
+     PB6   ------> I2C1_SCL
+     PB7   ------> I2C1_SDA
+*/
+void MX_GPIO_Init(void)
+{
+
+  GPIO_InitTypeDef GPIO_InitStruct;
+
+  /* GPIO Ports Clock Enable */
+  __GPIOE_CLK_ENABLE();
+  __GPIOC_CLK_ENABLE();
+  __GPIOF_CLK_ENABLE();
+  __GPIOA_CLK_ENABLE();
+  __GPIOB_CLK_ENABLE();
+
+  /*Configure GPIO pins : PE2 PE4 PE5 PE0 
+                           PE1 */
+  GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_0 
+                          |GPIO_PIN_1;
+  GPIO_InitStruct.Mode = GPIO_MODE_EVT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PE3 PE8 PE9 PE10 
+                           PE11 PE12 PE13 PE14 
+                           PE15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_3|GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10 
+                          |GPIO_PIN_11|GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14 
+                          |GPIO_PIN_15;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA0 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PA5 PA6 PA7 */
+  GPIO_InitStruct.Pin = GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
+  GPIO_InitStruct.Alternate = GPIO_AF5_SPI1;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PB6 PB7 */
+  GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
+  GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }
 
